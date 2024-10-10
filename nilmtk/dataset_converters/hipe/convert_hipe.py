@@ -35,7 +35,7 @@ def convert_hipe(hipe_path, output_filename, format="HDF"):
     _convert(hipe_path, datastore,
              _hipe_measurement_mapping_func, "Europe/Berlin")
 
-    metadata_path = "metadata"
+    metadata_path = join(get_module_directory(), 'dataset_converters', 'hipe', 'metadata')
 
     save_yaml_to_datastore(metadata_path, datastore)
 
