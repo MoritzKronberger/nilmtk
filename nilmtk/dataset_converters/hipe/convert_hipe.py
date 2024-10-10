@@ -96,7 +96,7 @@ def _load_csv(filename, measurements, drop_duplicates=False, sort_index=False):
     print(f"Processing {filename}")
     df = pd.read_csv(filename, usecols=["SensorDateTime", "P_kW"], index_col=0)
 
-    df.index = pd.to_datetime(df.index, utc=True)
+    df.index = pd.to_datetime(df.index, utc=True, format='mixed')
     df = df.tz_convert("Europe/Berlin")
     df["P_kW"] *= 1000  # convert kW to W
 
