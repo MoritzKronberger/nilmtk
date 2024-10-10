@@ -70,7 +70,7 @@ class HDFDataStore(DataStore):
                 yield data
                 continue
 
-            terms = window_intersect.query_terms('window_intersect')
+            terms = window_intersect.pandas_2_query_terms()
             if terms is None:
                 section_start_i = 0
                 section_end_i = self.store.get_storer(key).nrows
@@ -291,7 +291,7 @@ class HDFDataStore(DataStore):
         if timeframe_intersect.empty:
             nrows = 0
         elif timeframe_intersect:
-            terms = timeframe_intersect.query_terms('timeframe_intersect')
+            terms = timeframe_intersect.pandas_2_query_terms()
             coords = self.store.select_as_coordinates(key, terms)
             nrows = len(coords)
         else:

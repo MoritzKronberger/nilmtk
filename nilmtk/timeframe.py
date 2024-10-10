@@ -191,6 +191,20 @@ class TimeFrame(object):
                          + variable_name + ".end")
         return None if terms == [] else terms
 
+    def pandas_2_query_terms(self):
+        """Query terms compatible with Pandas>2.0."""
+        if self.empty:
+            raise Exception("TimeFrame is empty.")
+        terms = []
+        if self.start is not None:
+            start_str = f"'{self.start.isoformat()}'"
+            terms.append("index>=" + start_str)
+        if self.end is not None:
+            end_str = f"'{self.end.isoformat()}'"
+            terms.append("index<" + ("=" if self.include_end else "")
+                         + end_str)
+        return None if terms == [] else terms
+
     def slice(self, frame):
         """Slices `frame` using self.start and self.end.
 
